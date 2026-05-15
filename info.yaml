@@ -1,0 +1,63 @@
+# Tiny Tapeout project information — TRI-1 MINI Edition I
+# https://tinytapeout.com/specs/info_yaml/
+#
+# QUANTUM BRAIN MINI — Single cortical column, 1×1 tile, 4 GF16 cells.
+# TTSKY26c shuttle target. PhD Thesis Chapter 35 minimal falsification witness.
+# R-SI-1 verified: zero NEW `*` operators in src/*.v (XOR+adder only).
+# Anchor: phi^2 + phi^-2 = 3. DOI: 10.5281/zenodo.19227877.
+yaml_version: 6
+
+project:
+  title:        "TRI-1 MINI — Quantum Brain Single Cortical Column Edition I"
+  author:       "Dmitrii Vasilev"
+  discord:      "ghashtag"
+  description:  >
+    MINI SKU of the TRI-1 Triad (NANO / MID / MAX-TRUE / MINI), TTSKY26c
+    submission. Single cortical column: 4 GF16(2^4) ternary MAC cells in a
+    2×2 mesh. Minimum viable silicon: 1×1 TT tile, 0.0220 mm² Sky130A.
+    On reset drives canonical dot4(1.0, 2.0, 3.0, 4.0) = 0x47C0 on
+    {uio_out, uo_out} — byte-identical to NANO, MID, MAX-TRUE.
+    That equality is the cross-die anchor TG-TRIAD-X (PhD Theorem 36.1,
+    Chapter 35 Silicon Tapeout). 75 sacred ROM constants (Lucas sequence
+    + golden-ratio φ chain) × 16 GF16 opcodes.
+    R-SI-1: zero NEW `*` operators (XOR+adder cells only).
+    Anchor: phi^2 + phi^-2 = 3. DOI: 10.5281/zenodo.19227877.
+    Performance: 5.6 TOPS/W PROJECTED (not measured until GDS lands).
+    Hold a quantum brain in your hand for EUR 17.
+  language:     "Verilog"
+  clock_hz:     50000000
+
+  # MINI footprint = 1×1 TT tile = ~0.0220 mm² Sky130A.
+  tiles:        "1x1"
+
+  top_module:   "tt_um_qbrain_mini"
+
+  source_files:
+    - "tt_um_qbrain_mini.v"
+    - "gf16_mini_dot4.v"
+
+pinout:
+  ui[0]: "load_mode (0=canonical 0x47C0 default, 1=operand-load)"
+  ui[1]: "cell_sel[0] — target cell address"
+  ui[2]: "cell_sel[1]"
+  ui[3]: "operand_nibble[0] — low nibble of GF16 operand"
+  ui[4]: "operand_nibble[1]"
+  ui[5]: "operand_nibble[2]"
+  ui[6]: "operand_nibble[3]"
+  ui[7]: "reserved (tie low)"
+  uo[0]: "result[0] — canonical 0xC0[0] at reset"
+  uo[1]: "result[1]"
+  uo[2]: "result[2]"
+  uo[3]: "result[3]"
+  uo[4]: "result[4]"
+  uo[5]: "result[5]"
+  uo[6]: "result[6]"
+  uo[7]: "result[7]"
+  uio[0]: "result[8] — canonical 0x47[0] at reset"
+  uio[1]: "result[9]"
+  uio[2]: "result[10]"
+  uio[3]: "result[11]"
+  uio[4]: "result[12]"
+  uio[5]: "result[13]"
+  uio[6]: "result[14]"
+  uio[7]: "result[15]"
