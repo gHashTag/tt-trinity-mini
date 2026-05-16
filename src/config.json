@@ -1,0 +1,10 @@
+{
+  "DESIGN_NAME": "tt_um_qbrain_mini",
+  "VERILOG_FILES": "dir::src/*.v",
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 20,
+  "FP_PDN_VPITCH": 153.18,
+  "FP_PDN_HPITCH": 153.6,
+  "FP_PDN_VOFFSET": 25.27,
+  "FP_PDN_HOFFSET": 16.65
+}
